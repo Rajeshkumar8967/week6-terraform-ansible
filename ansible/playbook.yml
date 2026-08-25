@@ -1,0 +1,28 @@
+---
+- name: Week 6 Ansible Configuration Management
+  hosts: local
+
+
+  tasks:
+    - name: Install curl package
+      ansible.builtin.apt:
+        name: curl
+        state: present
+        update_cache: true
+
+    - name: Create DevOps user
+      ansible.builtin.user:
+        name: devopsuser
+        state: present
+        shell: /bin/bash
+
+    - name: Install cron service
+      ansible.builtin.apt:
+        name: cron
+        state: present
+
+    - name: Start cron service
+      ansible.builtin.service:
+        name: cron
+        state: started
+        enabled: true
